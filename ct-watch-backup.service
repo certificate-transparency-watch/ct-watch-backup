@@ -1,0 +1,22 @@
+[Unit]
+Description=Backup ctwatch.net's database
+Requires=postgresql.service
+Before=postgresql.service
+
+[Service]
+# TODO: Create such a user, and give them access to pg_dump
+User=ctwatchbackup
+Type=oneshot
+ExecStart=pg_dump
+ExecStart=tarsnap
+
+PrivateTmp=true
+PrivateDevices=true
+ProtectSystem=full
+
+## likely can't set this, if tarsnap cache needs to be written to, which'll be in home directory. Wish it was possible to stop modifying tarsnap key
+# perhaps have to use the more granular ReadOnlyDirectory/ReadWriteDirectory
+#ProtectHome=true
+
+[Install]
+WantedBy=multi-user.target
