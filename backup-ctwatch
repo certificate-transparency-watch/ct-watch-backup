@@ -1,0 +1,21 @@
+#!/bin/sh
+set -eu
+
+pg_dump \
+    --compress=0 \
+    --exclude-table=cert \
+    --exclude-table=log_entry \
+    ct-watch > /tmp/db.dump
+
+/usr/local/bin/tarsnap -c \
+    --humanize-numbers \
+    --print-stats \
+    --verbose \
+    --cachedir ~/.tarsnap-cache/ \
+    --keyfile ~/.tarsnap.ctwatch.write.key \
+    -f database.$(date -u +"%Y%m%dT%H%M%SZ") \
+    -C /tmp/ \
+    db.dump
+
+# something to work around https://github.com/systemd/systemd/issues/1347
+sleep 1

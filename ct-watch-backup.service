@@ -4,18 +4,11 @@ Requires=postgresql.service
 Before=postgresql.service
 
 [Service]
-# TODO: Create such a user, and give them access to pg_dump
 User=ctwatchbackup
 Type=oneshot
-ExecStart=pg_dump
-ExecStart=tarsnap
-
-# something to work around https://github.com/systemd/systemd/issues/1347
-ExecStart=sleep 1
+ExecStart=/bin/bash /home/ctwatchbackup/backup-ctwatch
 
 PrivateTmp=true
-PrivateDevices=true
-ProtectSystem=full
 
 ## likely can't set this, if tarsnap cache needs to be written to, which'll be in home directory. Wish it was possible to stop modifying tarsnap key
 # perhaps have to use the more granular ReadOnlyDirectory/ReadWriteDirectory
