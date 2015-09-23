@@ -2,7 +2,7 @@
 Description=Backup ctwatch.net's database
 
 [Timer]
-OnCalendar=*-*-* 0/6:0:0
+OnCalendar=*-*-* 0/12:0:0
 Persistent=true
 
 # don't start in the first 300 seconds of booting
