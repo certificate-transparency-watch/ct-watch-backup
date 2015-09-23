@@ -10,6 +10,9 @@ Type=oneshot
 ExecStart=pg_dump
 ExecStart=tarsnap
 
+# something to work around https://github.com/systemd/systemd/issues/1347
+ExecStart=sleep 1
+
 PrivateTmp=true
 PrivateDevices=true
 ProtectSystem=full
