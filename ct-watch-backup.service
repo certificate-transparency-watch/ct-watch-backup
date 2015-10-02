@@ -9,10 +9,8 @@ Type=simple
 ExecStart=/bin/bash /home/ctwatchbackup/backup-ctwatch
 
 PrivateTmp=true
-
-## likely can't set this, if tarsnap cache needs to be written to, which'll be in home directory. Wish it was possible to stop modifying tarsnap key
-# perhaps have to use the more granular ReadOnlyDirectory/ReadWriteDirectory
-#ProtectHome=true
+ReadOnlyDirectories=/
+ReadWriteDirectories=/home/ctwatchbackup/.tarsnap-cache
 
 [Install]
 WantedBy=multi-user.target
