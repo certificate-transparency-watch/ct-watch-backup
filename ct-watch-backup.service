@@ -5,7 +5,7 @@ Before=postgresql.service
 
 [Service]
 User=ctwatchbackup
-Type=oneshot
+Type=simple
 ExecStart=/bin/bash /home/ctwatchbackup/backup-ctwatch
 
 PrivateTmp=true
